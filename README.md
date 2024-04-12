@@ -21,6 +21,6 @@ Install it with `go install github.com/ananthb/dataurl/cmd/dataurl@latest`.
 ## [LICENSE](LICENSE)
 
 Forked from [vincent-petithory/dataurl](https://github.com/vincent-petithory/dataurl)
-with contributions from [MagicalTux/dataurl)[https://github.com/MagicalTux/dataurl/tree/fix-issue-5).
+with contributions from [MagicalTux/dataurl](https://github.com/MagicalTux/dataurl/tree/fix-issue-5).
 
 Dataurl is available under the terms of the MIT license.
