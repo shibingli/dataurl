@@ -4,13 +4,12 @@ import (
 	"flag"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"log"
 	"mime"
 	"os"
 	"path"
 
-	"github.com/vincent-petithory/dataurl"
+	"github.com/ananthb/dataurl"
 )
 
 var (
@@ -63,7 +62,7 @@ func main() {
 	case 1:
 		if flag.Arg(0) == "-" {
 			in = os.Stdin
-			return
+			break
 		}
 		if f, err := os.Open(flag.Arg(0)); err != nil {
 			log.Fatal(err)
@@ -109,9 +108,6 @@ func decode(in io.Reader, out io.Writer) (err error) {
 	}
 
 	_, err = out.Write(du.Data)
-	if err != nil {
-		return
-	}
 	return
 }
 
@@ -126,7 +122,7 @@ func encode(in io.Reader, out io.Writer, encoding string, mediatype string) (err
 			return
 		}
 	}()
-	b, err := ioutil.ReadAll(in)
+	b, err := io.ReadAll(in)
 	if err != nil {
 		return
 	}
@@ -135,8 +131,5 @@ func encode(in io.Reader, out io.Writer, encoding string, mediatype string) (err
 	du.Encoding = encoding
 
 	_, err = du.WriteTo(out)
-	if err != nil {
-		return
-	}
 	return
 }

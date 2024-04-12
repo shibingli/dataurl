@@ -6,7 +6,6 @@ import (
 	"errors"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"net/http"
 	"sort"
 	"strconv"
@@ -107,11 +106,11 @@ func New(data []byte, mediatype string, paramPairs ...string) *DataURL {
 // Note: it doesn't guarantee the returned string is equal to
 // the initial source string that was used to create this DataURL.
 // The reasons for that are:
-//  * Insertion of default values for MediaType that were maybe not in the initial string,
-//  * Various ways to encode the MediaType parameters (quoted string or url encoded string, the latter is used),
+//   - Insertion of default values for MediaType that were maybe not in the initial string,
+//   - Various ways to encode the MediaType parameters (quoted string or url encoded string, the latter is used),
 func (du *DataURL) String() string {
 	var buf bytes.Buffer
-	du.WriteTo(&buf)
+	_, _ = du.WriteTo(&buf)
 	return (&buf).String()
 }
 
@@ -135,8 +134,7 @@ func (du *DataURL) WriteTo(w io.Writer) (n int64, err error) {
 
 	if du.Encoding == EncodingBase64 {
 		encoder := base64.NewEncoder(base64.StdEncoding, w)
-		ni, err = encoder.Write(du.Data)
-		if err != nil {
+		if _, err = encoder.Write(du.Data); err != nil {
 			return
 		}
 		encoder.Close()
@@ -271,7 +269,7 @@ func DecodeString(s string) (*DataURL, error) {
 
 // Decode decodes a Data URL scheme from a io.Reader.
 func Decode(r io.Reader) (*DataURL, error) {
-	data, err := ioutil.ReadAll(r)
+	data, err := io.ReadAll(r)
 	if err != nil {
 		return nil, err
 	}
