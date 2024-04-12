@@ -25,6 +25,7 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version: ${{ matrix.go }}
+          args: --timeout=10m
 
       - uses: golangci/golangci-lint-action@v3
         with:
