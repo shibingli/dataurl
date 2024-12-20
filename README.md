@@ -16,6 +16,7 @@ Install it with `go install github.com/shibingli/dataurl/cmd/dataurl@latest`.
 
 ## [LICENSE](LICENSE)
 
-Forked from http://github.com/sss/ccc, reference https://github.com/vincent-petithory/dataurl"
+Forked from [RealImage/dataurl](https://github.com/RealImage/dataurl),
+reference [vincent-petithory/dataurl](https://github.com/vincent-petithory/dataurl)
 
 Dataurl is available under the terms of the MIT license.
